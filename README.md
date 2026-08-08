@@ -18,7 +18,7 @@
   Layer5 Academy
 </h1>
 
-**Layer5 Academy** is the **official content repository** for Layer5's learning platform, hosting all official learning paths, challenges, and certifications.  
+**Layer5 Academy** is the **official content repository** for Layer5's learning platform, hosting all official learning paths, challenges, and certifications.
 It is built with [Hugo](https://gohugo.io/) and integrated into a multi-repository architecture for rapid local preview and automated cloud deployment.
 
 ---
@@ -48,8 +48,8 @@ It is built with [Hugo](https://gohugo.io/) and integrated into a multi-reposito
 
 The Academy platform is composed of multiple repositories, each with a specific role:
 
-- **[`academy-theme`](https://github.com/layer5io/academy-theme)** – Controls the site’s layout, styles, typography, and shortcodes. Included automatically via Go modules.  
-- **[`academy-example`](https://github.com/layer5io/academy-example)** – Starter template for organizations to create their own content repositories following Academy standards.  
+- **[`academy-theme`](https://github.com/layer5io/academy-theme)** – Controls the site’s layout, styles, typography, and shortcodes. Included automatically via Go modules.
+- **[`academy-example`](https://github.com/layer5io/academy-example)** – Starter template for organizations to create their own content repositories following Academy standards.
 - **[`academy-build`](https://github.com/layer5io/academy-build)** – Central build and deployment pipeline. Aggregates content from multiple repos with the theme to generate and publish the complete Academy site.
 
 - For more detailed information: [Academy / Platform Development](https://docs.layer5.io/cloud/academy/platform-development/)
@@ -67,27 +67,38 @@ go mod tidy
 # Install necessary tools and modules
 make setup
 
-# Start the local Hugo development server
+# Start the local Hugo development server with live reload
 make site
 
-# Build the site for production
+# Serve the site once with the file watcher off (no live reload)
+make serve
+
+# Build the site locally with draft and future content enabled
 make build
 
-# Build the site for local consumption with custom base URL
+# Build the site for a deploy preview (honors DEPLOY_PRIME_URL)
 make build-preview
 
-# Clean the Hugo cache and restart local setup
+# Build the site for production (pass BASE_URL=... to set the base URL)
+make build-production
+
+# Empty the build cache, reinstall dependencies, and run the site locally
 make clean
+
+# Check Markdown for linting issues
+make lint
 
 # Fix Markdown linting issues
 make lint-fix
+
+# Check internal links in the built site
+make check-links
 
 # Verify Go is installed before starting the local site
 make check-go
 
 # Update the academy-theme package version
 make theme-update
-
 ```
 
 Open your browser at: ```http://localhost:1313/academy```. Note: The local preview uses the ```academy-theme```. In production, content is wrapped by the Layer5 Cloud UI, so minor visual differences may occur. For end-to-end validation, test with the ```academy-build``` repository.
